@@ -13,12 +13,12 @@ public class TASLock
 
     public void lock() 
     {
-        
+        while (testAndSet()) {}; //spin
     }
 
     public void unlock() 
     {
-        
+        locked.set(false);
     }
     
 }
