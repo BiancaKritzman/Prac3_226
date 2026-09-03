@@ -1,14 +1,14 @@
 public class Main 
 {
 
-    private static final int NUMBER_OF_THREADS = 2;
+    private static final int NUMBER_OF_THREADS = 32;
     private static final int INCREMENTS_PER_THREAD = 1000000;
     private static int counter = 0;
 
     public static void main(String[] args) throws InterruptedException 
     {
 
-        TASLock lock = ;/*Your lock implementation here (You may also swap out the TAS lock for your optimised lock here)*/
+        TTASLock lock = new TTASLock();/*Your lock implementation here (You may also swap out the TAS lock for your optimised lock here)*/
         Thread[] threads = new Thread[NUMBER_OF_THREADS];
         long startTime = System.nanoTime();
 
@@ -38,5 +38,6 @@ public class Main
         System.out.println("Expected counter: " + (NUMBER_OF_THREADS * INCREMENTS_PER_THREAD));
         System.out.println("Actual counter: " + counter);
         System.out.println("Execution time: " + (endTime - startTime) / 1000000 + " ms");
+        System.out.println("testAndSet() invocations: " + lock.getTestAndSetCount());
     }
 }
